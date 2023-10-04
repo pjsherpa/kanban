@@ -1,4 +1,3 @@
-import React from 'react'
 import { Droppable } from 'react-beautiful-dnd'
 import styled from 'styled-components'
 
@@ -18,7 +17,7 @@ padding:8px;
 background-color:pink;
 text-align:center;`;
 
-const TaskList=stled.div`
+const TaskList=styled.div`
 padding:3px;
 transistion:background-color 0.2s ease;
 background-color: #f4f5f7;
@@ -31,7 +30,11 @@ const Column = ({title,tasks,id}) => {
       <Title style={{backgroundColor:"lightblue",
       position:"stick"}}>{title}</Title>
       <Droppable droppableId={id}>
-       {/* Create Task List and placeholders in this */}
+        {(provided, snapshot)=>{
+    <TaskList ref={provided.innerRef}
+    {...provided.droppableProps} isDraggingOver={snapshot.isDraggingOver}>
+      {provided.placeholder}
+    </TaskList>}}
       </Droppable>
     </Container>
   )
